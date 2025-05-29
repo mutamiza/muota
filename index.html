@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>بطاقة تهنئة باسمك بعيد الأضحى المبارك</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    header img {
+      height: 70px;
+      width: auto;
+      max-width: 100%;
+    }
+    header h1 {
+      color: #0d47a1;
+      font-size: 20px;
+      margin: 10px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      max-width: 300px;
+      margin-top: 20px;
+      border: 2px solid #1976d2;
+      border-radius: 6px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      background-color: orange;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+    }
+    button:hover {
+      background-color: #e65100;
+    }
+    canvas {
+      margin-top: 20px;
+      display: none;
+      border: 2px solid #64b5f6;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="نهائي-شعار التربيه المتميزة_page-0001.jpg" alt="شعار المدرسة">
+    <div style="color: #1976d2; font-size: 16px; margin-top: 10px;">مدارس التربية المتميزة الأهلية</div>
+    <h1 style="margin-top: 10px;">بطاقة تهنئة باسمك بعيد الأضحى المبارك</h1>
+  </header>
+
+  <input type="text" id="employeeName" placeholder="اكتب اسمك هنا">
+  <br>
+  <button onclick="generateAndDownload()">إصدار وتحميل التهنئة</button>
+  <canvas id="greetingCanvas" width="800" height="600"></canvas>
+
+  <script>
+    const canvas = document.getElementById('greetingCanvas');
+    const ctx = canvas.getContext('2d');
+    let imageLoaded = false;
+
+    const image = new Image();
+    image.onload = function () {
+      imageLoaded = true;
+    };
+    image.src = 'صورة تهنئة.jpeg';
+
+    function generateAndDownload() {
+      const name = document.getElementById('employeeName').value.trim();
+      if (!name) {
+        alert('يرجى إدخال الاسم');
+        return;
+      }
+
+      if (!imageLoaded) {
+        alert('جاري تحميل الصورة، يرجى المحاولة بعد لحظة.');
+        return;
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      ctx.font = '32px Cairo';
+      ctx.fillStyle = '#8e24aa';
+      ctx.textAlign = 'center';
+      ctx.fillText(`أضحى مبارك ${name}، تقبل الله طاعتكم 🌹`, canvas.width / 2, canvas.height - 10);
+
+      canvas.style.display = 'block';
+
+      const link = document.createElement('a');
+      link.download = 'تهنئة عيد الأضحى.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
