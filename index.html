@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>بطاقة تهنئة باسمك بعيد الأضحى المبارك</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Reem+Kufi&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -69,6 +69,15 @@
       width: 100%;
       max-width: 100%;
     }
+  @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
 <body>
@@ -76,7 +85,11 @@
   <header>
     <img src="نهائي-شعار_التربيه_المتميزة_.png" alt="شعار المدرسة" style="height: 90px;">
     <div style="color: #1976d2; font-size: 16px; margin-top: 10px;">مدارس التربية المتميزة الأهلية</div>
-    <h1 style="margin-top: 10px;">بطاقة تهنئة باسمك بعيد الأضحى المبارك</h1>
+    <h1 style="margin-top: 10px; animation: fadeIn 2s ease-in-out;">
+      <span style="font-size: 24px; color: #0d47a1; font-weight: bold; animation: pulse 3s infinite;">كل عام وأنتم بخير</span>
+      <span style="font-size: 20px; color: #8e24aa; margin-top: 5px; animation: fadeIn 3s ease-in-out 1s forwards;">عيد أضحى مبارك</span>
+      <span style="font-size: 16px; color: #1976d2; margin-top: 5px; animation: fadeIn 3s ease-in-out 2s forwards;">ادخل اسمك لإصدار تهنئة باسمك</span>
+    </h1>
   </header>
 
   <input type="text" id="employeeName" placeholder="اكتب اسمك هنا">
@@ -110,10 +123,10 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-      ctx.font = '32px Cairo';
+      ctx.font = '32px "Reem Kufi", Cairo';
       ctx.fillStyle = '#8e24aa';
       ctx.textAlign = 'center';
-      ctx.fillText(`${name}`, canvas.width / 2, canvas.height - 10);
+      ctx.fillText(`${name}`, canvas.width / 2, canvas.height - 40);
 
       canvas.style.display = 'block';
 
