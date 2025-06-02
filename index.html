@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>بطاقة تهنئة باسمك بعيد الأضحى المبارك</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Reem+Kufi&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -20,43 +20,43 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       margin-bottom: 20px;
     }
     header img {
-      height: 70px;
+      height: 90px;
       width: auto;
       max-width: 100%;
     }
     header h1 {
-      color: #0d47a1;
-      font-size: 20px;
       margin: 10px 0 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       text-align: center;
+      animation: fadeIn 2s ease-in-out;
     }
     input {
-      padding: 10px;
+      padding: 12px;
       font-size: 16px;
-      width: 100%;
-      max-width: 300px;
-      margin-top: 20px;
+      width: 90%;
+      max-width: 320px;
+      margin-top: 15px;
+      border-radius: 8px;
       border: 2px solid #1976d2;
-      border-radius: 6px;
+      transition: 0.3s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #0d47a1;
     }
     button {
-      padding: 10px 20px;
+      padding: 12px;
       font-size: 16px;
+      width: 90%;
+      max-width: 320px;
       margin-top: 10px;
+      border-radius: 8px;
+      border: none;
       background-color: orange;
       color: white;
-      border: none;
-      border-radius: 5px;
       cursor: pointer;
-      width: 100%;
-      max-width: 300px;
     }
     button:hover {
       background-color: #e65100;
@@ -66,36 +66,39 @@
       display: none;
       border: 2px solid #64b5f6;
       border-radius: 10px;
-      width: 100%;
-      max-width: 100%;
+      width: auto;
+      height: auto;
     }
-  @keyframes fadeIn {
+    @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
     @keyframes pulse {
-      0% { transform: scale(1); }
+      0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="نهائي-شعار_التربيه_المتميزة_.png" alt="شعار المدرسة" style="height: 90px;">
-    <div style="color: #1976d2; font-size: 16px; margin-top: 10px;">مدارس التربية المتميزة الأهلية</div>
-    <h1 style="margin-top: 10px; animation: fadeIn 2s ease-in-out;">
-      <span style="font-size: 24px; color: #0d47a1; font-weight: bold; animation: pulse 3s infinite;">كل عام وأنتم بخير</span>
-      <span style="font-size: 20px; color: #8e24aa; margin-top: 5px; animation: fadeIn 3s ease-in-out 1s forwards;">عيد أضحى مبارك</span>
-      <span style="font-size: 16px; color: #1976d2; margin-top: 5px; animation: fadeIn 3s ease-in-out 2s forwards;">ادخل اسمك لإصدار تهنئة باسمك</span>
+    <img src="نهائي-شعار_التربيه_المتميزة_.png" alt="شعار المدرسة">
+    <div style="color: #1976d2; font-size: 16px;">مدارس التربية المتميزة الأهلية</div>
+    <h1>
+      <div style="font-size: 24px; color: #0d47a1; font-weight: bold; animation: pulse 3s infinite;">كل عام وأنتم بخير</div>
+      <div style="font-size: 20px; color: #8e24aa; margin-top: 5px;">عيد أضحى مبارك</div>
+      <div style="font-size: 16px; color: #1976d2; margin-top: 5px;">ادخل اسمك لإصدار تهنئة باسمك</div>
     </h1>
   </header>
 
-  <input type="text" id="employeeName" placeholder="اكتب اسمك هنا">
-  <br>
-  <button onclick="generateAndDownload()">إصدار وتحميل التهنئة</button>
-  <canvas id="greetingCanvas" width="800" height="600"></canvas>
+  <div style="margin-bottom: 20px;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+      <input type="text" id="employeeName" placeholder="اكتب اسمك هنا">
+      <button onclick="generateAndDownload()">إصدار وتحميل التهنئة</button>
+    </div>
+  </div>
+
+  <canvas id="greetingCanvas" width="768" height="1365"></canvas>
 
   <script>
     const canvas = document.getElementById('greetingCanvas');
@@ -106,7 +109,12 @@
     image.onload = function () {
       imageLoaded = true;
     };
-    image.src = 'صورة تهنئة.jpeg';
+    image.src = 'بطاقة-معايدة-بدون-اسم.png';
+
+    const font = new FontFace('Aref Ruqaa', 'url(https://fonts.gstatic.com/s/arefruqaa/v17/WwkbxPW1E165rajQKDulIE3eUnbT.woff2)');
+    font.load().then(function (loadedFont) {
+      document.fonts.add(loadedFont);
+    });
 
     function generateAndDownload() {
       const name = document.getElementById('employeeName').value.trim();
@@ -120,24 +128,26 @@
         return;
       }
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      document.fonts.ready.then(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-      ctx.font = '32px "Reem Kufi", Cairo';
-      ctx.fillStyle = '#8e24aa';
-      ctx.textAlign = 'center';
-      ctx.fillText(`${name}`, canvas.width / 2, canvas.height - 40);
+        ctx.font = '40px "Aref Ruqaa", "Cairo", serif';
+        ctx.fillStyle = '#0d47a1';
+        ctx.textAlign = 'center';
+        ctx.fillText(name, canvas.width / 2, canvas.height - 465);
 
-      canvas.style.display = 'block';
+        canvas.style.display = 'block';
 
-      const link = document.createElement('a');
-      link.download = 'تهنئة عيد الأضحى.png';
-      link.href = canvas.toDataURL();
-      link.click();
+        const link = document.createElement('a');
+        link.download = 'تهنئة عيد الأضحى.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
     }
   </script>
 
-<footer style="margin-top: 40px; font-size: 14px; color: #555;">
+  <footer style="margin-top: 40px; font-size: 14px; color: #555;">
     إدارة الإعلام والاتصال بمدارس التربية المتميزة
   </footer>
 </body>
