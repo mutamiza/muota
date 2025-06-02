@@ -135,10 +135,9 @@
         ctx.font = '40px "Aref Ruqaa", "Cairo", serif';
         ctx.fillStyle = '#0d47a1';
         ctx.textAlign = 'center';
-        ctx.fillText(name, canvas.width / 2, canvas.height - 464);
+        ctx.fillText(name, canvas.width / 2, canvas.height - 465);
 
-        canvas.style.display = 'block';
-
+        
         const link = document.createElement('a');
         link.download = 'تهنئة عيد الأضحى.png';
         link.href = canvas.toDataURL('image/png');
