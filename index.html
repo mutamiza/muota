@@ -98,7 +98,7 @@
     </div>
   </div>
 
-  <canvas id="greetingCanvas" width="768" height="1365"></canvas>
+  <canvas id="greetingCanvas" width="768" height="1365" style="width: 100%; height: auto;"></canvas>
 
   <script>
     const canvas = document.getElementById('greetingCanvas');
@@ -135,7 +135,7 @@
         ctx.font = '40px "Aref Ruqaa", "Cairo", serif';
         ctx.fillStyle = '#0d47a1';
         ctx.textAlign = 'center';
-        ctx.fillText(name, canvas.width / 2, canvas.height - 467);
+        ctx.fillText(name, canvas.width / 2, canvas.height - 464);
 
         canvas.style.display = 'block';
 
