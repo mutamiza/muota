@@ -62,11 +62,10 @@
       background-color: #e65100;
     }
     canvas {
-      margin-top: 20px;
-      display: none;
-      border: 2px solid #64b5f6;
+      margin: 20px auto;
+      display: block;
       border-radius: 10px;
-      width: auto;
+      width: 384px;
       height: auto;
     }
     @keyframes fadeIn {
@@ -93,23 +92,38 @@
 
   <div style="margin-bottom: 20px;">
     <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+      <select id="designChoice" style="padding: 10px; font-size: 16px; max-width: 320px;">
+        <option value="بطاقة معايدة بالهوية.PNG">بطاقة بهوية المتميزة</option>
+        <option value="بطاقة-معايدة-بدون-اسم (2).png">بطاقة بدون هوية</option>
+      </select>
       <input type="text" id="employeeName" placeholder="اكتب اسمك هنا">
       <button onclick="generateAndDownload()">إصدار وتحميل التهنئة</button>
     </div>
   </div>
 
-  <canvas id="greetingCanvas" width="768" height="1365" style="width: 100%; height: auto;"></canvas>
+  <canvas id="greetingCanvas" width="768" height="1365" style="width: 384px; height: auto;"></canvas>
 
   <script>
     const canvas = document.getElementById('greetingCanvas');
     const ctx = canvas.getContext('2d');
     let imageLoaded = false;
 
-    const image = new Image();
-    image.onload = function () {
-      imageLoaded = true;
-    };
-    image.src = 'بطاقة-معايدة-بدون-اسم.png';
+    let image = new Image();
+    function loadImageFromSelection() {
+      image = new Image();
+      image.onload = function () {
+        imageLoaded = true;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      };
+      image.src = designSelect.value;
+    }
+    const designSelect = document.getElementById('designChoice');
+    designSelect.addEventListener('change', () => {
+      imageLoaded = false;
+      loadImageFromSelection();
+    });
+    loadImageFromSelection();
 
     const font = new FontFace('Aref Ruqaa', 'url(https://fonts.gstatic.com/s/arefruqaa/v17/WwkbxPW1E165rajQKDulIE3eUnbT.woff2)');
     font.load().then(function (loadedFont) {
@@ -135,9 +149,13 @@
         ctx.font = '40px "Aref Ruqaa", "Cairo", serif';
         ctx.fillStyle = '#0d47a1';
         ctx.textAlign = 'center';
-        ctx.fillText(name, canvas.width / 2, canvas.height - 465);
+        const selectedDesign = designSelect.value;
+        let textY = canvas.height - 540;
+        if (selectedDesign.includes("بدون-اسم")) {
+          textY = canvas.height - 468;
+        }
+        ctx.fillText(name, canvas.width / 2, textY);
 
-        
         const link = document.createElement('a');
         link.download = 'تهنئة عيد الأضحى.png';
         link.href = canvas.toDataURL('image/png');
